@@ -1,7 +1,7 @@
 
 <div align="center">
 
-![Contatos](image/logo-contatos.png)
+![Contatos](image/banner.png)
 
 </div>
 
