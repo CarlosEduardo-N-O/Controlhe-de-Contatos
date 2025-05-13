@@ -5,9 +5,9 @@
 
 </div>
 
-# Sistema de Gerenciamento de Contatos
+# Sistema para Controle de Contatos
 
-Este repositório contém um projeto simples de gerenciamento de contatos desenvolvido com foco em boas práticas, utilizando **PHP**, **PostgreSQL**, **Doctrine ORM**, **padrão MVC** e **Docker**.
+Este repositório contém um projeto simples para controle de contatos desenvolvido com foco em boas práticas, utilizando **PHP**, **PostgreSQL**, **Doctrine ORM**, **padrão MVC** e **Docker**.
 
 > Ideal para estudos, testes técnicos ou como base para novos projetos PHP com arquitetura limpa e separação de responsabilidades.
 
@@ -84,7 +84,7 @@ php vendor/bin/doctrine orm:schema-tool:update --force
 
 Abra seu navegador e acesse:
 
-[http://localhost:8000](http://localhost:8080/Public/)
+[http://localhost:8000](http://localhost:8080/public/)
 
 ---
 
