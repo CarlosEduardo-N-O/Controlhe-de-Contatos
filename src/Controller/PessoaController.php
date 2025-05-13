@@ -54,7 +54,7 @@ class PessoaController
     public function editar($id)
     {
         $pessoa = $this->entityManager->getRepository(Pessoa::class)->find($id);
-        include __DIR__ . '/..View/Pessoa/form.php';
+        include __DIR__ . '/../View/Pessoa/form.php';
     }
 
     public function salvar()
@@ -62,19 +62,45 @@ class PessoaController
         $id = $_POST['id'] ?? null;
         $nome = $_POST['nome'] ?? '';
         $cpfcnpj = $_POST['cpfcnpj'] ?? '';
+        $erro = '';
 
-        if ($id) {
-            $pessoa = $this->entityManager->getRepository(Pessoa::class)->find($id);
-        } else {
-            $pessoa = new Pessoa();
+        try {
+            if (empty($nome) || empty($cpfcnpj)) {
+                throw new \Exception('Nome e CPF/CNPJ são obrigatórios.');
+            }
+
+            if ($id) {
+                $pessoa = $this->entityManager->getRepository(Pessoa::class)->find($id);
+                if (!$pessoa) {
+                    throw new \Exception('Pessoa não encontrada.');
+                }
+            } else {
+                $pessoa = new Pessoa();
+            }
+
+            $pessoa->setNome($nome);
+            $pessoa->setCpfcnpj($cpfcnpj);
+
+            $this->entityManager->persist($pessoa);
+            $this->entityManager->flush();
+
+            header('Location: ?rota=pessoas');
+            exit;
+        } catch (\Exception $e) {
+            // Em caso de erro, define mensagem e carrega novamente o form com os dados preenchidos
+            $erro = $e->getMessage();
+
+            if (isset($pessoa) && $pessoa instanceof Pessoa) {
+                // mantém objeto carregado ao editar
+            } else {
+                $pessoa = new Pessoa();
+                $pessoa->setNome($nome);
+                $pessoa->setCpfcnpj($cpfcnpj);
+            }
+
+            // variável $erro será utilizada na view
+            include __DIR__ . '/../View/Pessoa/form.php';
         }
-
-        $pessoa->setNome($nome);
-        $pessoa->setCpfcnpj($cpfcnpj);
-        $this->entityManager->persist($pessoa);
-        $this->entityManager->flush();
-
-        header('Location: ?rota=pessoas');
     }
 
     public function deletar($id)

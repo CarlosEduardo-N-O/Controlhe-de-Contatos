@@ -28,6 +28,12 @@
   <div class="container mt-5">
     <h2><?= isset($pessoa) ? 'Editar' : 'Adicionar' ?> Pessoa</h2>
 
+    <?php if (!empty($erro)): ?>
+      <div class="alert alert-danger mt-3" role="alert">
+        <?= htmlspecialchars($erro) ?>
+      </div>
+    <?php endif; ?>
+
     <form method="POST" action="?rota=salvar_pessoa">
       <?php if (isset($pessoa)): ?>
         <input type="hidden" name="id" value="<?= $pessoa->getId(); ?>">
