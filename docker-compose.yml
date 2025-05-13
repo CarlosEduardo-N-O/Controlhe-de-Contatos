@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    image: contatos-app
+    ports:
+      - "8080:80"
+    environment:
+      - ENV_VAR=value
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: contatos-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

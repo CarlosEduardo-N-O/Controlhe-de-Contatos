@@ -1,27 +1,28 @@
 <?php
+use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMSetup;
+use Dotenv\Dotenv;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// Diretório onde estão suas entidades (com atributos PHP 8+)
-$config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: [__DIR__ . '/src/Entity'],
-    isDevMode: true,
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$config = Setup::createAnnotationMetadataConfiguration(
+    [__DIR__ . "/src/Model"],
+    true,
+    null,
+    null,
+    false
 );
 
-// Configurações para PostgreSQL
-$connection = [
-    'driver'   => 'pdo_pgsql',
-    'host'     => '127.0.0.1',
-    'port'     => 5432,
-    'dbname'   => 'contatos',
-    'user'     => 'postgres',
-    'password' => 'unidavi',
-    'charset'  => 'utf8',
+$conn = [
+    'driver'   => $_ENV['DB_DRIVER'],
+    'host'     => $_ENV['DB_HOST'],
+    'port'     => $_ENV['DB_PORT'],
+    'dbname'   => $_ENV['DB_NAME'],
+    'user'     => $_ENV['DB_USER'],
+    'password' => $_ENV['DB_PASSWORD'],
 ];
 
-$entityManager = EntityManager::create($connection, $config);
-
-// Retorna o EntityManager para uso no restante do app
-return $entityManager;
+$entityManager = EntityManager::create($conn, $config);
