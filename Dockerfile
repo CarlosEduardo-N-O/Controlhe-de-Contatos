@@ -17,7 +17,7 @@ RUN a2enmod rewrite
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Copiar os arquivos do projeto
-COPY . /var/www/html/
+COPY . /var/www/html/Public
 
 # Permissões
 RUN chown -R www-data:www-data /var/www/html

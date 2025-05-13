@@ -56,7 +56,7 @@ Verifique se os dados estão corretos:
 DB_DRIVER=pdo_pgsql
 DB_HOST=db
 DB_PORT=5432
-DB_NAME=contatos
+DB_NAME=contatos=db
 DB_USER=postgres
 DB_PASSWORD=postgres
 ```
@@ -84,7 +84,7 @@ php vendor/bin/doctrine orm:schema-tool:update --force
 
 Abra seu navegador e acesse:
 
-[http://localhost:8000](http://localhost:8000)
+[http://localhost:8000](http://localhost:8080/Public/)
 
 ---
 
@@ -103,15 +103,21 @@ Abra seu navegador e acesse:
 ## 📁 Estrutura do projeto
 
 ```
+├── .docker/
+├── image/
+├── public/
 ├── src/
 │   ├── Controller/
 │   ├── Model/
 │   ├── View/
-├── public/
+├── vendor/
 ├── .env.example
+├── bootstrap.php
+├── cli-config.php
+├── composer.json
+├── composer.lock
 ├── docker-compose.yml
 ├── Dockerfile
-├── composer.json
 └── README.md
 ```
 

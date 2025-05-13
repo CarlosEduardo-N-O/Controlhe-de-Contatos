@@ -73,6 +73,6 @@ switch ($rota) {
     // TELA INICIAL
     case 'index':
     default:
-        include __DIR__ . '/../src/view/index.php';
+        include __DIR__ . '/../src/View/index.php';
         break;
 }
